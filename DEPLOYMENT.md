@@ -1,45 +1,44 @@
-# How to Deploy to GitHub Pages
+# How to Deploy
 
-To host this application on GitHub Pages, you can use the configured GitHub Actions workflow for automatic deployment.
+You have two main options to host this application: **Vercel** (Recommended) or **GitHub Pages**.
 
-## 1. Create a GitHub Repository
-1. Go to [GitHub.com](https://github.com) and create a new repository (e.g., named `project-flow`).
-2. Do not initialize it with a README, .gitignore, or license.
+## Option 1: Vercel (Recommended)
+Vercel is the easiest way to deploy React/Vite applications.
 
-## 2. Update `package.json`
-Open `package.json` and find the `"homepage"` field. Update it to match your GitHub URL:
+1.  Push your code to GitHub.
+2.  Go to [Vercel.com](https://vercel.com) and sign up/login with GitHub.
+3.  Click **"Add New..."** > **"Project"**.
+4.  Import your GitHub repository.
+5.  Vercel will detect it's a Vite project automatically.
+6.  Click **Deploy**.
 
-```json
-"homepage": "https://<YOUR_GITHUB_USERNAME>.github.io/<YOUR_REPO_NAME>",
+That's it! Your app will be live and updated automatically when you push to GitHub.
+
+---
+
+## Option 2: GitHub Pages
+If you prefer to stay on GitHub, follow these steps.
+
+### 1. Update `vite.config.js`
+Open `vite.config.js` and set the `base` property to your repository name.
+
+```javascript
+export default defineConfig({
+  plugins: [react()],
+  base: '/<YOUR_REPO_NAME>/', // e.g., '/project-flow/'
+})
 ```
 
-## 3. Configure GitHub Actions Permissions
-For the workflow to work, it needs permission to write to your repository.
-1. Go to your repository on GitHub.
-2. Click **Settings** > **Actions** > **General**.
-3. Scroll down to **Workflow permissions**.
-4. Select **Read and write permissions**.
-5. Click **Save**.
+### 2. Deployment
+You can deploy manually or automatically.
 
-## 4. Push your code
-Push your code to the `main` branch. This will automatically trigger the deployment.
+**Automatic (using GitHub Actions):**
+1. Ensure your `.github/workflows/deploy.yml` is present.
+2. Push your changes to `main`.
+3. Go to Repo Settings > Pages > Select `gh-pages` branch.
 
-```bash
-git remote add origin https://github.com/<YOUR_GITHUB_USERNAME>/<YOUR_REPO_NAME>.git
-git branch -M main
-git push -u origin main
-```
-
-## 5. Enable GitHub Pages
-1. Go to your repository **Settings** > **Pages**.
-2. Under **Build and deployment** > **Source**, select **Deploy from a branch**.
-3. Under **Branch**, select `gh-pages` and `/ (root)`.
-4. Click **Save**.
-
-Your app will be live in a few minutes!
-
-## Manual Deployment (Optional)
-If you prefer to deploy manually from your computer, you can still run:
+**Manual:**
+Run this command in your terminal:
 
 ```bash
 npm run deploy
