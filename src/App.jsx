@@ -52,9 +52,9 @@ const Toast = ({ message, type, onClose }) => {
 const NotificationsDropdown = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
   return (
-    <div className="absolute right-0 top-12 w-80 bg-white rounded-xl shadow-xl border border-slate-100 z-50 animate-in fade-in zoom-in-95 duration-200">
+    <div className="absolute right-0 top-12 w-80 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-100 dark:border-slate-700 dark:text-slate-100 z-50 animate-in fade-in zoom-in-95 duration-200">
       <div className="p-4 border-b border-slate-50 flex justify-between items-center">
-        <h4 className="font-semibold text-slate-800">შეტყობინებები</h4>
+        <h4 className="font-semibold text-slate-800 dark:text-slate-100">შეტყობინებები</h4>
         <button onClick={onClose} className="text-slate-400 hover:text-slate-600"><X size={16}/></button>
       </div>
       <div className="max-h-64 overflow-y-auto">
@@ -114,15 +114,15 @@ const CalendarView = ({ tasks }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 animate-in fade-in duration-300 h-full flex flex-col">
+    <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 dark:text-slate-100 p-6 animate-in fade-in duration-300 h-full flex flex-col">
       <div className="flex flex-col sm:flex-row items-center justify-between mb-6 gap-4">
-        <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-2">
+        <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
           {monthNames[month]} <span className="text-slate-400 font-light">{year}</span>
         </h2>
         <div className="flex items-center gap-3 bg-slate-50 p-1 rounded-xl border border-slate-100">
-          <button onClick={prevMonth} className="p-2 hover:bg-white hover:shadow-sm rounded-lg transition-all text-slate-600"><ChevronLeft size={20} /></button>
-          <button onClick={goToToday} className="px-4 py-1.5 text-sm font-medium text-slate-600 hover:bg-white hover:shadow-sm rounded-lg transition-all">დღეს</button>
-          <button onClick={nextMonth} className="p-2 hover:bg-white hover:shadow-sm rounded-lg transition-all text-slate-600"><ChevronRight size={20} /></button>
+          <button onClick={prevMonth} className="p-2 hover:bg-white dark:hover:bg-slate-700 hover:shadow-sm rounded-lg transition-all text-slate-600 dark:text-slate-200"><ChevronLeft size={20} /></button>
+          <button onClick={goToToday} className="px-4 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-200 hover:bg-white dark:hover:bg-slate-700 hover:shadow-sm rounded-lg transition-all">დღეს</button>
+          <button onClick={nextMonth} className="p-2 hover:bg-white dark:hover:bg-slate-700 hover:shadow-sm rounded-lg transition-all text-slate-600 dark:text-slate-200"><ChevronRight size={20} /></button>
         </div>
       </div>
 
@@ -144,7 +144,7 @@ const CalendarView = ({ tasks }) => {
             const isToday = todayDate.getDate() === day && todayDate.getMonth() === month && todayDate.getFullYear() === year;
             
             return (
-                <div key={day} className={`bg-white p-2 min-h-[100px] hover:bg-slate-50 transition-colors flex flex-col group relative ${isToday ? 'bg-indigo-50/30' : ''}`}>
+                <div key={day} className={`bg-white dark:bg-slate-800 p-2 min-h-[100px] hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex flex-col group relative ${isToday ? 'bg-indigo-50/30 dark:bg-indigo-500/20' : ''}`}>
                     <span className={`text-sm font-medium w-7 h-7 flex items-center justify-center rounded-full mb-1 ${isToday ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200' : 'text-slate-700'}`}>
                         {day}
                     </span>
@@ -181,8 +181,8 @@ const AnalyticsView = ({ tasks }) => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-in slide-in-from-bottom-4 duration-500">
-      <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-        <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
+      <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 dark:text-slate-100">
+        <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-6 flex items-center gap-2">
             <PieChart size={20} className="text-indigo-600"/> სტატუსების განაწილება
         </h3>
         <div className="space-y-6">
@@ -192,16 +192,16 @@ const AnalyticsView = ({ tasks }) => {
                         <span className="text-slate-600">{item.l}</span>
                         <span className={`font-bold ${item.tc}`}>{Math.round((item.v/total)*100)}%</span>
                     </div>
-                    <div className="h-3 w-full bg-slate-100 rounded-full overflow-hidden">
+                        <input type="text" value={firstName} onChange={e => setFirstName(e.target.value)} className="w-full p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-all dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600"/>
                         <div className={`h-full ${item.c} rounded-full transition-all duration-1000`} style={{ width: `${(item.v/total)*100}%` }}></div>
                     </div>
                 </div>
-            ))}
+                        <input type="text" value={lastName} onChange={e => setLastName(e.target.value)} className="w-full p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-all dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600"/>
         </div>
       </div>
 
-      <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-        <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
+      <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 dark:text-slate-100">
+                        <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-all dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600"/>
             <BarChart3 size={20} className="text-rose-500"/> პრიორიტეტები
         </h3>
         <div className="flex items-end justify-around h-48 pt-4 border-b border-slate-100">
@@ -212,7 +212,7 @@ const AnalyticsView = ({ tasks }) => {
                             {item.v} დავალება
                         </div>
                     </div>
-                    <span className="text-xs font-medium text-slate-500">{item.l}</span>
+                    <span className="text-xs font-medium text-slate-500 dark:text-slate-400">{item.l}</span>
                 </div>
             ))}
         </div>
@@ -230,9 +230,9 @@ const SettingsView = ({ onClearData, onSave }) => {
 
     return (
         <div className="max-w-3xl mx-auto space-y-6 animate-in slide-in-from-right-8 duration-500">
-            <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden">
+            <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 dark:text-slate-100 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
-                <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-6 flex items-center gap-2">
                     <User className="text-indigo-600"/> პროფილის პარამეტრები
                 </h3>
                 <div className="flex flex-col md:flex-row items-center gap-8 mb-8">
@@ -268,11 +268,11 @@ const SettingsView = ({ onClearData, onSave }) => {
                 </div>
             </form>
 
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-red-100">
+            <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-red-100 dark:border-red-700 dark:text-slate-100">
                 <h3 className="text-xl font-bold text-red-600 mb-4 flex items-center gap-2">
                     <ShieldAlert className="text-red-500"/> საფრთხის ზონა
                 </h3>
-                <p className="text-slate-500 text-sm mb-6">
+                <p className="text-slate-500 text-sm mb-6 dark:text-slate-400">
                     მონაცემების გასუფთავება წაშლის ყველა დავალებას Local Storage-დან. ამ მოქმედების უკან დაბრუნება შეუძლებელია.
                 </p>
                 <button 
@@ -290,11 +290,11 @@ const SettingsView = ({ onClearData, onSave }) => {
 // --- არსებული მცირე კომპონენტები ---
 
 const StatCard = ({ title, value, change, icon: Icon, color }) => (
-  <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow group">
+  <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-md transition-shadow group dark:text-slate-100">
     <div className="flex justify-between items-start">
       <div>
-        <p className="text-slate-500 text-sm font-medium mb-1">{title}</p>
-        <h3 className="text-2xl font-bold text-slate-800 group-hover:text-indigo-600 transition-colors">{value}</h3>
+        <p className="text-slate-500 text-sm font-medium mb-1 dark:text-slate-400">{title}</p>
+        <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 group-hover:text-indigo-600 transition-colors">{value}</h3>
       </div>
       <div className={`p-3 rounded-xl ${color} shadow-lg shadow-indigo-100/50`}>
         <Icon size={20} className="text-white" />
@@ -311,16 +311,16 @@ const StatCard = ({ title, value, change, icon: Icon, color }) => (
 
 const KanbanColumn = ({ title, count, status, children, onAdd }) => (
   <div className="flex-1 min-w-[300px]">
-    <div className="flex items-center justify-between mb-4 sticky top-0 bg-slate-50 py-2 z-10">
+    <div className="flex items-center justify-between mb-4 sticky top-0 bg-slate-50 dark:bg-slate-800 py-2 z-10">
       <div className="flex items-center gap-2">
         <h3 className="font-semibold text-slate-700">{title}</h3>
-        <span className="bg-white text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-bold border border-slate-200 shadow-sm">
+        <span className="bg-white dark:bg-slate-700 text-slate-600 dark:text-slate-200 px-2.5 py-0.5 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-600 shadow-sm">
           {count}
         </span>
       </div>
       <button 
         onClick={() => onAdd(status)}
-        className="p-1.5 hover:bg-white hover:shadow-sm rounded-lg text-slate-500 transition-all border border-transparent hover:border-slate-200"
+        className="p-1.5 hover:bg-white dark:hover:bg-slate-700 hover:shadow-sm rounded-lg text-slate-500 dark:text-slate-200 transition-all border border-transparent hover:border-slate-200 dark:hover:border-slate-600"
       >
         <Plus size={18} />
       </button>
@@ -339,7 +339,7 @@ const TaskCard = ({ task, onMove, onDelete }) => {
   };
 
   return (
-    <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 group hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-grab active:cursor-grabbing relative overflow-hidden">
+    <div className="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 group hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-grab active:cursor-grabbing relative overflow-hidden dark:text-slate-100">
       <div className={`absolute top-0 left-0 w-1 h-full ${task.priority === 'High' ? 'bg-rose-500' : task.priority === 'Medium' ? 'bg-amber-500' : 'bg-emerald-500'}`}></div>
       <div className="flex justify-between items-start mb-2 pl-2">
         <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold border ${priorityColors[task.priority]}`}>
@@ -352,8 +352,8 @@ const TaskCard = ({ task, onMove, onDelete }) => {
           <Trash2 size={14} />
         </button>
       </div>
-      <h4 className="font-bold text-slate-800 mb-1 pl-2 text-sm">{task.title}</h4>
-      <p className="text-slate-500 text-xs mb-3 pl-2 line-clamp-2 leading-relaxed">{task.description}</p>
+      <h4 className="font-bold text-slate-800 dark:text-slate-100 mb-1 pl-2 text-sm">{task.title}</h4>
+      <p className="text-slate-500 text-xs mb-3 pl-2 line-clamp-2 leading-relaxed dark:text-slate-400">{task.description}</p>
       
       <div className="flex items-center justify-between pt-3 border-t border-slate-50 pl-2">
         <div className="flex items-center gap-2 text-xs text-slate-400">
@@ -395,16 +395,16 @@ const AddTaskModal = ({ isOpen, onClose, onSave, initialStatus }) => {
 
   return (
     <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[100] p-4 animate-in fade-in duration-200">
-      <div className="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl animate-in zoom-in-95 duration-200 relative overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 rounded-2xl w-full max-w-md p-6 shadow-2xl animate-in zoom-in-95 duration-200 relative overflow-hidden dark:text-slate-100">
         <div className="absolute top-0 left-0 w-full h-1.5 bg-indigo-600"></div>
         <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-bold text-slate-800">ახალი დავალება</h2>
+            <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">ახალი დავალება</h2>
             <button onClick={onClose} className="text-slate-400 hover:text-rose-500 transition-colors"><X size={20}/></button>
         </div>
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-slate-500 uppercase mb-1.5">სათაური</label>
+            <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1.5">სათაური</label>
             <input 
               required
               autoFocus
@@ -415,21 +415,21 @@ const AddTaskModal = ({ isOpen, onClose, onSave, initialStatus }) => {
             />
           </div>
           <div>
-            <label className="block text-xs font-bold text-slate-500 uppercase mb-1.5">აღწერა</label>
+            <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1.5">აღწერა</label>
             <textarea 
               value={desc}
               onChange={e => setDesc(e.target.value)}
-              className="w-full p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-all h-24 resize-none text-sm"
+              className="w-full p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-all h-24 resize-none text-sm dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600"
               placeholder="დეტალური აღწერა..."
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-                <label className="block text-xs font-bold text-slate-500 uppercase mb-1.5">პრიორიტეტი</label>
+                <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1.5">პრიორიტეტი</label>
                 <select 
                 value={priority}
                 onChange={e => setPriority(e.target.value)}
-                className="w-full p-2.5 border border-slate-200 rounded-lg outline-none bg-white text-sm"
+                className="w-full p-2.5 border border-slate-200 rounded-lg outline-none bg-white text-sm dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600"
                 >
                 <option value="Low">დაბალი</option>
                 <option value="Medium">საშუალო</option>
@@ -437,17 +437,17 @@ const AddTaskModal = ({ isOpen, onClose, onSave, initialStatus }) => {
                 </select>
             </div>
             <div>
-                <label className="block text-xs font-bold text-slate-500 uppercase mb-1.5">ვადა</label>
+                <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1.5">ვადა</label>
                 <input 
                     type="date"
                     value={date}
                     onChange={e => setDate(e.target.value)}
-                    className="w-full p-2.5 border border-slate-200 rounded-lg outline-none bg-white text-slate-600 text-sm"
+                    className="w-full p-2.5 border border-slate-200 rounded-lg outline-none bg-white text-slate-600 text-sm dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600"
                 />
             </div>
           </div>
           
-          <div className="flex gap-3 pt-4 border-t border-slate-50 mt-4">
+          <div className="flex gap-3 pt-4 border-t border-slate-50 dark:border-slate-700 mt-4">
             <button type="button" onClick={onClose} className="flex-1 py-2.5 text-slate-600 hover:bg-slate-50 rounded-xl transition-colors font-medium text-sm">გაუქმება</button>
             <button type="submit" className="flex-1 py-2.5 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-200 font-medium text-sm flex justify-center items-center gap-2">
                 <Plus size={16}/> დამატება
@@ -610,7 +610,7 @@ export default function App() {
       )}
 
       {/* Sidebar */}
-      <aside className={`fixed inset-y-0 left-0 w-64 bg-white border-r border-slate-200 z-30 transition-transform duration-300 md:relative md:translate-x-0 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <aside className={`fixed inset-y-0 left-0 w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-700 z-30 transition-transform duration-300 md:relative md:translate-x-0 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="p-6 h-full flex flex-col">
           <div className="flex items-center justify-between mb-8">
              <div className="flex items-center gap-3 text-indigo-600">
@@ -664,23 +664,23 @@ export default function App() {
         {/* Header */}
         <header className="h-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 flex items-center justify-between px-6 sticky top-0 z-10">
           <div className="flex items-center gap-4 text-slate-400 flex-1 max-w-xl">
-             <button onClick={() => setIsMobileMenuOpen(true)} className="md:hidden text-slate-600 p-1 hover:bg-slate-100 rounded-lg">
+             <button onClick={() => setIsMobileMenuOpen(true)} className="md:hidden text-slate-600 dark:text-slate-200 p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
                 <Menu size={24} />
             </button>
-            <div className="relative w-full max-w-sm hidden sm:block">
-                <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"/>
-                <input 
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="ძებნა (მაგ: API)..." 
-                    className="w-full bg-slate-50 border border-transparent focus:bg-white focus:border-indigo-200 rounded-xl py-2 pl-10 pr-4 outline-none text-slate-600 placeholder-slate-400 text-sm transition-all"
-                />
+             <div className="relative w-full max-w-sm hidden sm:block">
+              <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"/>
+              <input 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="ძებნა (მაგ: API)..." 
+                className="w-full bg-slate-50 dark:bg-slate-800 border border-transparent focus:bg-white dark:focus:bg-slate-800 focus:border-indigo-200 rounded-xl py-2 pl-10 pr-4 outline-none text-slate-600 dark:text-slate-100 placeholder-slate-400 text-sm transition-all"
+              />
             </div>
           </div>
           <div className="flex items-center gap-3 relative">
             <button 
-                onClick={() => setShowNotifications(!showNotifications)}
-                className={`relative p-2.5 rounded-full transition-all ${showNotifications ? 'bg-indigo-50 text-indigo-600' : 'text-slate-400 hover:bg-slate-100 hover:text-slate-600'}`}
+              onClick={() => setShowNotifications(!showNotifications)}
+              className={`relative p-2.5 rounded-full transition-all ${showNotifications ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900 dark:text-indigo-300' : 'text-slate-400 hover:bg-slate-100 hover:text-slate-600 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-slate-100'}`}
             >
               <Bell size={20} />
               <span className="absolute top-2 right-2.5 w-2 h-2 bg-rose-500 rounded-full border border-white"></span>
@@ -690,7 +690,7 @@ export default function App() {
             <button
               onClick={toggleTheme}
               aria-label="Toggle theme"
-              className={`p-2.5 rounded-full transition-all ml-1 ${isDark ? 'bg-slate-700 text-slate-100' : 'text-slate-400 hover:bg-slate-100 hover:text-slate-600'}`}
+              className={`p-2.5 rounded-full transition-all ml-1 ${isDark ? 'bg-slate-700 text-slate-100' : 'text-slate-400 hover:bg-slate-100 hover:text-slate-600 dark:text-slate-300 dark:hover:bg-slate-800'}`}
             >
               {isDark ? <Sun size={18} /> : <Moon size={18} />}
             </button>
@@ -704,8 +704,8 @@ export default function App() {
             {/* Header Text */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
               <div>
-                <h1 className="text-2xl md:text-3xl font-bold text-slate-800 mb-2">გამარჯობა, გიორგი! 👋</h1>
-                <p className="text-slate-500">{new Date().toLocaleDateString('ka-GE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                <h1 className="text-2xl md:text-3xl font-bold text-slate-800 dark:text-slate-100 mb-2">გამარჯობა, გიორგი! 👋</h1>
+                <p className="text-slate-500 dark:text-slate-400">{new Date().toLocaleDateString('ka-GE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
               </div>
               {(activeTab === 'board' || activeTab === 'timeline') && (
                 <button 
@@ -723,10 +723,10 @@ export default function App() {
                  <div className="relative w-full">
                     <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"/>
                     <input 
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="დავალებების ძებნა..." 
-                        className="w-full bg-white border border-slate-200 focus:border-indigo-500 rounded-xl py-2.5 pl-10 pr-4 outline-none text-slate-600 text-sm shadow-sm"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder="დავალებების ძებნა..." 
+                      className="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 focus:border-indigo-500 rounded-xl py-2.5 pl-10 pr-4 outline-none text-slate-600 dark:text-slate-100 text-sm shadow-sm"
                     />
                 </div>
             </div>
