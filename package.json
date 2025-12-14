@@ -11,7 +11,7 @@
     "tailwindcss-animate": "^1.0.7",
     "web-vitals": "^2.1.4"
   },
-    "homepage": "https://{Muchvardi}.github.io/{my-first-rep}",
+    "homepage": "https://Muchvardi.github.io/my-first-rep",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
