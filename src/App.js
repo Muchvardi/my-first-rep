@@ -138,7 +138,8 @@ const CalendarView = ({ tasks }) => {
         ))}
         {Array.from({ length: daysInMonth }, (_, i) => i + 1).map(day => {
             const dayTasks = getTasksForDay(day);
-            const isToday = new Date().getDate() === day && new Date().getMonth() === month && new Date().getFullYear() === new Date().getFullYear();
+            const todayDate = new Date();
+            const isToday = todayDate.getDate() === day && todayDate.getMonth() === month && todayDate.getFullYear() === year;
             
             return (
                 <div key={day} className={`bg-white p-2 min-h-[100px] hover:bg-slate-50 transition-colors flex flex-col group relative ${isToday ? 'bg-indigo-50/30' : ''}`}>
@@ -376,11 +377,12 @@ const TaskCard = ({ task, onMove, onDelete }) => {
 };
 
 const AddTaskModal = ({ isOpen, onClose, onSave, initialStatus }) => {
-  if (!isOpen) return null;
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [priority, setPriority] = useState("Medium");
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+
+  if (!isOpen) return null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
