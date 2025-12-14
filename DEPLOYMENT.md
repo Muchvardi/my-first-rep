@@ -1,23 +1,28 @@
 # How to Deploy to GitHub Pages
 
-To host this application on GitHub Pages for free, follow these steps:
+To host this application on GitHub Pages, you can use the configured GitHub Actions workflow for automatic deployment.
 
 ## 1. Create a GitHub Repository
 1. Go to [GitHub.com](https://github.com) and create a new repository (e.g., named `project-flow`).
-2. Do not initialize it with a README, .gitignore, or license (the project already has them).
+2. Do not initialize it with a README, .gitignore, or license.
 
 ## 2. Update `package.json`
-Open `package.json` in your code editor and find the `"homepage"` field near the top.
-Update it to match your GitHub username and repository name:
+Open `package.json` and find the `"homepage"` field. Update it to match your GitHub URL:
 
 ```json
 "homepage": "https://<YOUR_GITHUB_USERNAME>.github.io/<YOUR_REPO_NAME>",
 ```
 
-*Example:* If your username is `george` and repo is `project-flow`, it should be `"https://george.github.io/project-flow"`.
+## 3. Configure GitHub Actions Permissions
+For the workflow to work, it needs permission to write to your repository.
+1. Go to your repository on GitHub.
+2. Click **Settings** > **Actions** > **General**.
+3. Scroll down to **Workflow permissions**.
+4. Select **Read and write permissions**.
+5. Click **Save**.
 
-## 3. Push your code to GitHub
-Run the following commands in your terminal (inside the project folder):
+## 4. Push your code
+Push your code to the `main` branch. This will automatically trigger the deployment.
 
 ```bash
 git remote add origin https://github.com/<YOUR_GITHUB_USERNAME>/<YOUR_REPO_NAME>.git
@@ -25,19 +30,17 @@ git branch -M main
 git push -u origin main
 ```
 
-## 4. Deploy the App
-Once the code is on GitHub, run this command to deploy:
+## 5. Enable GitHub Pages
+1. Go to your repository **Settings** > **Pages**.
+2. Under **Build and deployment** > **Source**, select **Deploy from a branch**.
+3. Under **Branch**, select `gh-pages` and `/ (root)`.
+4. Click **Save**.
+
+Your app will be live in a few minutes!
+
+## Manual Deployment (Optional)
+If you prefer to deploy manually from your computer, you can still run:
 
 ```bash
 npm run deploy
 ```
-
-This script will:
-1. Build the React application.
-2. Push the build files to a `gh-pages` branch on your repository.
-
-## 5. Enable GitHub Pages
-1. Go to your repository on GitHub.
-2. Click on **Settings** > **Pages**.
-3. Under **Build and deployment** > **Branch**, ensure `gh-pages` is selected (it should happen automatically).
-4. Wait a few minutes, and your app will be live at the link you configured in `homepage`!
