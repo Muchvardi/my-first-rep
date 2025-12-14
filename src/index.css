@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Smooth theme transitions */
+html {
+	transition: background-color 200ms ease, color 200ms ease;
+}
+
+/* Provide a small fallback for non-tailwind places */
+body {
+	transition: background-color 200ms ease, color 200ms ease;
+}

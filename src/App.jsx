@@ -23,7 +23,9 @@ import {
   ShieldAlert,
   X,
   Menu,
-  Check
+  Check,
+  Sun,
+  Moon
 } from 'lucide-react';
 
 // --- დამხმარე კომპონენტები ---
@@ -460,6 +462,24 @@ const AddTaskModal = ({ isOpen, onClose, onSave, initialStatus }) => {
 // --- მთავარი აპლიკაცია ---
 
 export default function App() {
+  // Theme (dark/light)
+  const [isDark, setIsDark] = useState(() => {
+    try {
+      const saved = localStorage.getItem('projectFlowTheme');
+      if (saved) return saved === 'dark';
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    } catch (e) {
+      return false;
+    }
+  });
+
+  useEffect(() => {
+    try {
+      document.documentElement.classList.toggle('dark', isDark);
+      localStorage.setItem('projectFlowTheme', isDark ? 'dark' : 'light');
+    } catch (e) {}
+  }, [isDark]);
+
   const [activeTab, setActiveTab] = useState('board');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalStatus, setModalStatus] = useState('todo');
@@ -579,8 +599,10 @@ export default function App() {
     }
   }
 
+  const toggleTheme = () => setIsDark(d => !d);
+
   return (
-    <div className="flex h-screen bg-slate-50 font-sans text-slate-800 overflow-hidden">
+    <div className="flex h-screen bg-slate-50 dark:bg-slate-900 font-sans text-slate-800 dark:text-slate-100 overflow-hidden">
       
       {/* Sidebar Overlay for Mobile */}
       {isMobileMenuOpen && (
@@ -640,7 +662,7 @@ export default function App() {
       {/* Main Content */}
       <main className="flex-1 flex flex-col overflow-hidden relative w-full">
         {/* Header */}
-        <header className="h-16 bg-white/80 backdrop-blur-md border-b border-slate-200 flex items-center justify-between px-6 sticky top-0 z-10">
+        <header className="h-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 flex items-center justify-between px-6 sticky top-0 z-10">
           <div className="flex items-center gap-4 text-slate-400 flex-1 max-w-xl">
              <button onClick={() => setIsMobileMenuOpen(true)} className="md:hidden text-slate-600 p-1 hover:bg-slate-100 rounded-lg">
                 <Menu size={24} />
@@ -664,6 +686,14 @@ export default function App() {
               <span className="absolute top-2 right-2.5 w-2 h-2 bg-rose-500 rounded-full border border-white"></span>
             </button>
             <NotificationsDropdown isOpen={showNotifications} onClose={() => setShowNotifications(false)} />
+            {/* Theme toggle */}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              className={`p-2.5 rounded-full transition-all ml-1 ${isDark ? 'bg-slate-700 text-slate-100' : 'text-slate-400 hover:bg-slate-100 hover:text-slate-600'}`}
+            >
+              {isDark ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
           </div>
         </header>
 
