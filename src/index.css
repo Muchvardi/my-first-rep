@@ -11,3 +11,24 @@ html {
 body {
 	transition: background-color 200ms ease, color 200ms ease;
 }
+
+/* Strong dark-mode overrides for form controls and white backgrounds
+	 to avoid cases where components keep light bg but text becomes light. */
+.dark input,
+.dark textarea,
+.dark select,
+.dark .bg-white,
+.dark .bg-slate-50 {
+	background-color: #0f1724 !important; /* slate-900-ish */
+	color: #e6eef8 !important; /* light text */
+	border-color: #334155 !important; /* slate-700 */
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+	color: #94a3b8 !important; /* slate-400 */
+}
+
+.dark .text-slate-600 {
+	color: #cbd5e1 !important;
+}
