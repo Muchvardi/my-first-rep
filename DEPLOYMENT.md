@@ -19,15 +19,8 @@ That's it! Your app will be live and updated automatically when you push to GitH
 ## Option 2: GitHub Pages
 If you prefer to stay on GitHub, follow these steps.
 
-### 1. Update `vite.config.js`
-Open `vite.config.js` and set the `base` property to your repository name.
-
-```javascript
-export default defineConfig({
-  plugins: [react()],
-  base: '/<YOUR_REPO_NAME>/', // e.g., '/project-flow/'
-})
-```
+### 1. Configuration (Already Done!)
+The `vite.config.js` is already configured with `base: './'`, so it works automatically on any path.
 
 ### 2. Deployment
 You can deploy manually or automatically.
